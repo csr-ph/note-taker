@@ -9,7 +9,7 @@ const readFile = util.promisify(fs.readFile);
 
 class Store {
     read() {
-        return readFile('db/db.json');
+        return readFile('db/notes.json');
     }
 
     write(note) {
