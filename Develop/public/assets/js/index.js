@@ -35,8 +35,6 @@ const getNotes = (err) =>
     }
     
   });
-  
-
 
 const saveNote = (note) => {
   fetch('/api/notes', {
