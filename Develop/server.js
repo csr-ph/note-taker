@@ -29,8 +29,20 @@ app.get('/api/notes', (err, res) => {
 
 // route for adding a new note
 app.post('/api/notes', (req, res) => {
-
-})
+    try {
+        noteData = fs.readFileSync('./db/notes.json', 'utf8');
+        noteData = JSON.parse(createNoteData);
+        req.body.id = noteData.length;
+        noteData.push(req.body);
+        noteData = JSON.stringify(noteData);
+        fs.writeFile('./db/notes.json', noteData, 'utf8', (err) => {
+            if (err) throw err;
+        });
+        res.json(JSON.parse(noteData));
+    } catch (err) {
+        throw err;
+    }
+});
 
 app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, "db/notes.json"));
