@@ -5,6 +5,8 @@ const { notes } = require('./db/notes');
 const path = require('path');
 const fs = require('fs');
 
+const PORT = process.env.PORT || 3001;
+
 // create a blank array to store notes
 let noteData = [];
 
@@ -64,6 +66,6 @@ app.get('*', (req, res) => {
 });
 
 //set up listener for server
-app.listen(3001, () => {
-    console.log('Now listening on port 3001');
+app.listen(PORT, () => {
+    console.log(`Now listening on port ${PORT}`);
 });
