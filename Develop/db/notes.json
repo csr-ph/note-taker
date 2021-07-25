@@ -1,6 +1,7 @@
 [
     {
-        "title":"Test Title",
-        "text":"Test text"
+        "title": "Test Note",
+        "text": "This is a test note. Quite testy, isn't it?",
+        "id": ""
     }
 ]

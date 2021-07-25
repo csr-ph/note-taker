@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "base-x": "^3.0.8",
-    "express": "^4.16.4",
-    "rndid": "0.0.2"
+    "express": "^4.17.1",
+    "require": "^2.4.20",
+    "rndid": "0.0.2",
+    "uuid": "^8.3.2"
   }
 }

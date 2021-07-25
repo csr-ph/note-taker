@@ -1,5 +1,3 @@
-const { response } = require('express');
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -27,16 +25,15 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
-const getNotes = (err) => 
+const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-    }
-    
+    },
   });
 
-const saveNote = (note) => {
+const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
     headers: {
@@ -44,16 +41,14 @@ const saveNote = (note) => {
     },
     body: JSON.stringify(note),
   });
-}
 
-const deleteNote = (id) => {
+const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   });
-}
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -84,7 +79,7 @@ const handleNoteSave = () => {
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
-  // Prevents the click listener for the list from being called when the button inside of it is clicked
+  // prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
   const note = e.target;
@@ -136,7 +131,6 @@ const renderNoteList = async (notes) => {
     liEl.classList.add('list-group-item');
 
     const spanEl = document.createElement('span');
-    spanEl.classList.add('list-item-title');
     spanEl.innerText = text;
     spanEl.addEventListener('click', handleNoteView);
 

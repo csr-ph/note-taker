@@ -1,18 +1,39 @@
-const util = require('util');
 const fs = require('fs');
+const util = require('util');
 
-// npm package for creating ids
-const rndid = require('rndid');
+let noteData = require('../db/notes');
 
-const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
 
 class Store {
-    read() {
-        return readFile('db/notes.json');
+    write(note) {
+        return writeFile(noteData, JSON.stringify(note));
     }
 
-    write(note) {
-        
+    getAllNotes() {
+        return readFile(noteData).then((notes) => {
+            let parsedNotes;
+            try {
+                parsedNotes = [].concat(JSON.parse(notes));
+            } catch (err) {
+                parsedNotes = [];
+            }
+
+            return parsedNotes;
+        });
+    }
+
+    newNote(note) {
+        const { title, text } = note;
+
+        const createNote = { title, text };
+
+        return this.getAllNotes()
+        .then((notes) => [...notes, createNote])
+        .then((refreshedNotes) => this.write(refreshedNotes))
+        .then(() => createNote);
     }
 }
+
+module.exports = new Store();
